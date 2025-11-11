@@ -15,7 +15,7 @@ Quick start (Windows)
 Use `cmd.exe` to bypass PowerShell execution policy:
 
 ```cmd
-cd /d "d:\4MU22CS035\QUIZ APP"
+cd /d d:"QUIZ APP"
 npm install
 ```
 
@@ -46,7 +46,7 @@ npm start
 Or from PowerShell (if restricted), run via `cmd`:
 
 ```powershell
-cmd /c "cd /d 'd:\4MU22CS035\QUIZ APP' && npm start"
+cmd /c "cd /d 'd:QUIZ APP' && npm start"
 ```
 
 4. Open multiple browser tabs to `http://localhost:3000`, create a contest in one tab, join with other tabs, then start the contest as the host.
@@ -62,4 +62,5 @@ Files created
 - `public/index.html` and `public/client.js` — minimal client UI
 - `package.json` — dependencies and scripts
 - `questions.json` — manually-added quiz questions (edit this to customize)
+
 
