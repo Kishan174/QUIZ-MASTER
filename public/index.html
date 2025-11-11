@@ -1,0 +1,297 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Real-time Quiz App</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    #main {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    /* Setup Screen */
+    #setup {
+      background: white;
+      border-radius: 15px;
+      padding: 50px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+    
+    #setup h1 {
+      color: #667eea;
+      margin-bottom: 40px;
+      font-size: 2.5em;
+    }
+    
+    #setup label {
+      display: block;
+      margin: 20px 0;
+      font-size: 1.1em;
+      color: #333;
+    }
+    
+    #setup input {
+      padding: 12px 20px;
+      font-size: 1em;
+      border: 2px solid #667eea;
+      border-radius: 8px;
+      margin-left: 10px;
+      width: 250px;
+    }
+    
+    button {
+      padding: 12px 30px;
+      margin: 10px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    
+    #setup button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      width: 300px;
+    }
+    
+    #setup button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    }
+    
+    hr {
+      margin: 30px 0;
+      border: none;
+      border-top: 2px solid #ddd;
+    }
+    
+    /* Lobby/Contest Screen */
+    #lobby {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+    
+    #lobbyInfo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    #lobbyInfo h2 {
+      color: #667eea;
+      margin-bottom: 20px;
+    }
+    
+    #lobbyInfo button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      margin: 10px;
+    }
+    
+    #lobbyInfo button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    }
+    
+    #leave {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%) !important;
+    }
+    
+    #leave:hover {
+      box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4) !important;
+    }
+    
+    /* Question Area */
+    #questionArea {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      border-radius: 15px;
+      padding: 40px;
+      color: white;
+      margin: 30px 0;
+    }
+    
+    #questionText {
+      font-size: 1.8em;
+      margin-bottom: 30px;
+      text-align: center;
+      font-weight: bold;
+    }
+    
+    #choices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    #choices button {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 2px solid white;
+      padding: 20px;
+      font-size: 1.1em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    #choices button:hover:not(:disabled) {
+      background: white;
+      color: #f5576c;
+      transform: scale(1.05);
+    }
+    
+    #choices button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+    
+    #choices button.selected {
+      background: white;
+      color: #f5576c;
+      font-weight: bold;
+    }
+    
+    /* Reveal Area */
+    #revealArea {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      border-radius: 15px;
+      padding: 40px;
+      color: white;
+      margin: 30px 0;
+      text-align: center;
+    }
+    
+    #revealArea h4 {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+    }
+    
+    #revealText {
+      font-size: 1.2em;
+      margin: 20px 0;
+    }
+    
+    /* Leaderboard */
+    #leaderboard {
+      background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+      border-radius: 15px;
+      padding: 30px;
+      margin-top: 30px;
+    }
+    
+    #leaderboard h3 {
+      color: white;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.8em;
+    }
+    
+    #leaders {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    
+    #leaders li {
+      background: rgba(255, 255, 255, 0.3);
+      padding: 15px 20px;
+      border-radius: 10px;
+      color: white;
+      font-size: 1.1em;
+      font-weight: bold;
+      text-align: center;
+      border-left: 5px solid white;
+    }
+    
+    #leaders li:nth-child(1) {
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+      color: #333;
+      border-left-color: #333;
+      font-size: 1.3em;
+    }
+    
+    #leaders li:nth-child(2) {
+      background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
+      color: #333;
+      border-left-color: #333;
+    }
+    
+    #leaders li:nth-child(3) {
+      background: linear-gradient(135deg, #cd7f32 0%, #e6a76b 100%);
+      color: #fff;
+    }
+    
+    /* Question Counter */
+    #questionCounter {
+      text-align: center;
+      color: white;
+      font-size: 1.1em;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="main">
+    <div id="setup">
+      <h1>🎯 Quiz Master</h1>
+      <label>Your name: <input id="name" value="Player" placeholder="Enter your name" /></label>
+      <button id="create">🚀 Create Contest</button>
+      <hr />
+      <label>Join room: <input id="roomId" placeholder="Enter room code" /></label>
+      <button id="join">🎮 Join Contest</button>
+    </div>
+
+    <div id="lobby" class="hidden">
+      <div id="lobbyInfo">
+        <h2>📍 Room: <span id="roomLabel" style="color: #f5576c;"></span></h2>
+        <button id="startContest">▶️ Start Contest (Host)</button>
+        <button id="leave">❌ Leave</button>
+      </div>
+
+      <div id="questionArea" class="hidden">
+        <div id="questionCounter"></div>
+        <h3 id="questionText"></h3>
+        <div id="choices"></div>
+      </div>
+
+      <div id="revealArea" class="hidden">
+        <h4>✅ Answer Revealed!</h4>
+        <div id="revealText"></div>
+        <p id="nextQuestionMsg" style="margin-top: 20px; font-size: 1em;">Loading next question...</p>
+      </div>
+
+      <div id="leaderboard">
+        <h3>🏆 Live Leaderboard</h3>
+        <ol id="leaders"></ol>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script src="/client.js"></script>
+</body>
+</html>

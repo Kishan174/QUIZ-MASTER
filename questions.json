@@ -1,0 +1,62 @@
+[
+  {
+    "id": "q1",
+    "text": "What is the capital of France?",
+    "choices": ["London", "Berlin", "Paris", "Madrid"],
+    "answerIndex": 2
+  },
+  {
+    "id": "q2",
+    "text": "Which planet is known as the Red Planet?",
+    "choices": ["Venus", "Mars", "Jupiter", "Saturn"],
+    "answerIndex": 1
+  },
+  {
+    "id": "q3",
+    "text": "What is the largest ocean on Earth?",
+    "choices": ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+    "answerIndex": 3
+  },
+  {
+    "id": "q4",
+    "text": "Who wrote 'Romeo and Juliet'?",
+    "choices": ["Jane Austen", "William Shakespeare", "Charles Dickens", "Mark Twain"],
+    "answerIndex": 1
+  },
+  {
+    "id": "q5",
+    "text": "What is the smallest country in the world?",
+    "choices": ["Monaco", "San Marino", "Vatican City", "Liechtenstein"],
+    "answerIndex": 2
+  },
+  {
+    "id": "q6",
+    "text": "In which year did the Titanic sink?",
+    "choices": ["1912", "1915", "1920", "1905"],
+    "answerIndex": 0
+  },
+  {
+    "id": "q7",
+    "text": "What is the chemical symbol for Gold?",
+    "choices": ["Go", "Gd", "Au", "Ag"],
+    "answerIndex": 2
+  },
+  {
+    "id": "q8",
+    "text": "Which country is home to the Great Wall?",
+    "choices": ["Japan", "China", "Korea", "Vietnam"],
+    "answerIndex": 1
+  },
+  {
+    "id": "q9",
+    "text": "What is the speed of light?",
+    "choices": ["300,000 km/s", "150,000 km/s", "450,000 km/s", "200,000 km/s"],
+    "answerIndex": 0
+  },
+  {
+    "id": "q10",
+    "text": "Who is the author of 'Harry Potter'?",
+    "choices": ["Stephen King", "J.R.R. Tolkien", "J.K. Rowling", "George R.R. Martin"],
+    "answerIndex": 2
+  }
+]
